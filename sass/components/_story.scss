@@ -1,0 +1,83 @@
+
+.story{
+
+    width:75%;
+    margin: 0 auto;
+    box-shadow: 0 3rem 6rem rgba($color-black, .1);
+    background-color:rgba($color-white, .6);
+    border-radius:3px;
+    padding: 6rem;
+    padding-left:9rem;
+    font-size: $default-font-size;
+    transform: skewX(-12deg);
+   
+    @include respond(tab-port){
+        width: 100%;
+        padding:4rem;
+        padding-left: 7rem;
+    }
+    @include respond(phone){
+        transform:skew(0);
+    }
+
+    &__shape{
+        width: 15rem;
+        height: 15rem;
+        float: left;
+        -webkit-shape-outside: circle(50% at 50% 50%);//50% of given sizes=7.5rem. 50-50% center vertically o horizontally of cicrle
+        shape-outside: circle(50% at 50% 50%);//shapeoutside that flow around the circle,50% of 15rem width and  15rem height
+
+        -webkit-clip-path: circle(50% at 50% 50%);
+        clip-path: circle(50% at 50% 50%);//for the circle shape.
+        transform: translateX(-3rem) skewX(12deg);//translateX para naay space sa circle ug text.
+        position: relative;
+        backface-visibility: hidden;
+
+        @include respond(phone){
+            transform: translateX(-3rem) skewX(0);
+        }
+    }
+
+    &__text{
+
+        transform: skewX(12deg); //ang text straight maski naka skew ang tibook bg.
+
+        @include respond(phone){
+           transform: skewX(0);//no skewing, normal box ra.
+        }
+    }
+
+    &__img{
+        height: 100%;
+        transform: translateX(-3rem) scale(1.4);//scale kadako sa pict 140%.
+        backface-visibility: hidden;
+        transition: all .5s;
+        
+
+    }
+    &__caption{
+        position:absolute;
+        top:50%;
+        left: 50%;
+        transform: translate(-50%, 20%); //20% means maggikan ang bago mopakita 
+        text-transform: uppercase;
+        color:$color-white;
+        font-size: 1.7rem;
+        text-align:center;
+        opacity: 0;// sa zero magstart before hovering start.
+        transition: all .5s;
+        backface-visibility: hidden;//magshake after sa hover nka hide.
+    }
+
+    &:hover &__caption{
+        opacity: 1;// from 0 to 1 inig hover
+        transform: translate(-50%, -50%);//mosaka pataas ang name kay -50 % tpos -50 mocenter sya.
+    }
+    &:hover &__img{
+        transform: translateX(-4rem) scale(1);//scale kadako sa pict 100% mogamay sya.
+        filter: blur(3px) brightness(80%);
+    }
+
+
+   
+}

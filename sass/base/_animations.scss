@@ -1,0 +1,27 @@
+@keyframes moveInLeft{ /*add this later to css edit*/
+    0%{
+        opacity:0;
+        transform: translateX(-10rem);/*rotating to right direction coz its negative*/
+    }
+    80%{
+        transform: translateX(1rem);/*rotating pabalik 20px after sa -100px */
+    }
+    100%{
+        opacity: 1;/*back to 1*/
+        transform: translate(0);/*back to how it looks now*/
+    }
+}
+
+@keyframes moveInRight{ /*add this later to css edit*/
+    0%{
+        opacity:0;
+        transform: translateX(10rem);/*rotating to right direction coz its negative*/
+    }
+    80%{
+        transform: translateX(-1rem);/*rotating pabalik 20px after sa -100px */
+    }
+    100%{
+        opacity: 1;/*back to 1*/
+        transform: translate(0);/*back to how it looks now*/
+    }
+}

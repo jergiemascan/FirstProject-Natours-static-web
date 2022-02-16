@@ -1,0 +1,37 @@
+
+.composition{
+     position: relative;
+
+    &__photo {
+        width: 55%;
+        box-shadow: 0 1.5rem 4rem rgba($color-black, .4);
+        border-radius: 2px;
+        position: absolute;
+        z-index: 10;
+        transition: all .2s;
+        outline-offset: 2rem; // ram utanför bilder
+
+
+        &--p1{
+            left:0;
+            top:-2rem;
+        }
+        &--p2{
+            right:0;//moving 0px from the right.
+            top:2rem; //moving from the top
+        }
+        &--p3{
+            left:20%;//from the left
+            top:10rem;
+        }
+        &:hover{
+            outline: 1.5rem solid $color-primary; // // ram utanför bilder
+            transform:  scale(1.05) translateY(-.5rem);//translate moves picts up,lihok ang picts para dli boring
+            box-shadow: 0 2.5rem 4rem rgba($color-black,  .5);
+            z-index: 20;
+        }
+    }
+    &:hover &__photo :not(:hover){ //when you hover the photo the others thats not being hovered decreases.
+        transform: scale(.95);//kadako sa pict sa imong gi hover
+    }
+}

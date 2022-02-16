@@ -1,0 +1,162 @@
+.popup{
+    //////*POPUP SPECS ANIMATIONS,WHEN CLICKING THE TARGET/*/
+    /*the whole white popup*/
+    height: 100vh;
+    width: 100%;
+    position: fixed; /*doesnt move when we scroll */
+    top:0;
+    left:0;
+    z-index:9999; /*to hide the button men under the popup*/
+
+    /*hide before and show later when clicking the tours */
+    opacity: 0;
+    visibility: hidden;
+    transition:all .3s;
+    -webkit-transition:all .3s;
+    -moz-transition:all .3s;
+    -ms-transition:all .3s;
+    -o-transition:all .3s;
+
+    /*for different browser web if none if each supported in modern use this if*/
+    @supports(-webkit-backdrop-filter: blur(10px)) or ( backdrop-filter: blur(10px)){
+        -webkit-backdrop-filter: blur(10px);/*blurred the bg of the pop up*/
+        backdrop-filter: blur(10px);
+        background-color: rgba($color-black, .3);/*to darken the bg*/
+    }
+
+    ////*OPEN STATES*////
+
+    &:target{
+         /*it means popup + target where u clicked and visar dig vidare till external popup sida*/
+        opacity: 1;
+        visibility: visible;
+    }
+    /*popup animation when clicking the content, it become big coming to you when opening.*/
+    &:target &__content{
+        opacity: 1;
+        transform:translate(-50%,-50%) scale(1);/*mobalik sya to 1 kadako.*/
+        -webkit-transform:translate(-50%, -50%) scale(1);
+        -moz-transform:translate(-50%, -50%) scale(1);
+        -ms-transform:translate(-50%, -50%) scale(1);
+        -o-transform:translate(-50%, -50%) scale(1);
+}
+
+    /*when closing the popup,the X specs*/
+
+    &__close{
+
+        &:link,
+        &:visited{
+            color: $color-grey-dark;
+            position: absolute;
+            top: 2.5rem;
+            right:2.5rem;
+            font-size: 3rem;
+            text-decoration: none;
+            display: inline-block;
+            line-height: 1;
+            transition: all .2s;
+            -webkit-transition: all .2s;
+            -moz-transition: all .2s;
+            -ms-transition: all .2s;
+            -o-transition: all .2s;
+
+            
+        }
+        &:hover{
+            color: $color-primary;
+        } 
+    }
+    
+//////////////////////// HTML POPUPCONTENT/////
+   
+    &__content{/*the content inside the white popup where elements img and texts are.*/
+        
+        @include absCenter;
+
+        width: 75%;
+        background-color: $color-white;
+        box-shadow: 0 2rem 4rem rgba($color-black, .2);
+        border-radius: 3px;/*make it rounder the white popup.*/
+        display: table;/*thewholewhitepopupcontentdisplayedastable,thentheelementsinsidemustbetable-cell.*/
+        //for the  height tobe equal and easier to center the text contents H2 and h3 contents.So browser kan automaticlly give the
+        //&__leftand&__rightthesameequalheight.*/
+        overflow: hidden;/*imgoverflows,hiddenandothercontentstosotheborder-radiussees*/
+        
+        /*specs sa animation inig click open sa content modako sya padulong nimo.*/
+        opacity: 0;
+        transform:translate(-50%,-50%) scale(0);/*gibalik ang translate kay naa na sa mixins ang isa dli pwede 2pcs scale 0 kadako mugikan ang pagdako*/
+        transition: all .5s .2s;/*so that the effects applies when opening, fade out after .2s*/
+        -moz-transform:translate(-50%, -50%) scale(.5);
+        -ms-transform:translate(-50%, -50%) scale(.5);
+        -o-transform:translate(-50%, -50%) scale(.5);
+        -webkit-transform:translate(-50%, -50%) scale(.5);
+      
+        @include respond(phone){
+            width: 100%;
+
+        }
+}
+
+    &__left{ /*where the imges are*/
+        width: 33.33333%;/*100%width divided into 3 groups- 3 tables.*/
+        display: table-cell;
+
+        @include respond(tab-land){
+            width: 50%;
+            vertical-align: middle;
+            padding: 2rem 2rem;
+
+        }
+      @include respond(phone){
+          display: table-row;
+      }
+
+    }
+
+    &__right{/* where the h2,texts and book now are in.*/
+
+        width: 66.6666667%;/*the remaining width is to right side.*/
+        display: table-cell;
+        vertical-align:middle;/* for the content to be aligned in middle of the table-cell.*/
+        padding:3rem 5rem;
+
+       @include respond(tab-land){
+            width:100%;
+            padding:1rem 2rem;
+        }
+    }
+    &__img{
+        display: block;
+        width: 100%;
+        @include respond (tab-land){
+            width: 100%;
+        }
+
+    }
+
+    &__text{
+        font-size: 1.4rem;
+        margin-bottom: 4rem;
+
+        @include respond(tab-land){
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            column-count: 1;
+            padding-right: 2rem;
+
+        }
+
+        /*hypenation the texts- text-brytning och blev 2 rader coloumn.*/
+
+        column-count: 2;/*you can put how many cols u want ant it auto. devide the heights of all cols.*/
+        column-gap: 4rem;/*space between columns.
+        column-rule: 1px solid $color-grey-light-2;//border vertical line I in between columns.*/
+
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;/*dash- text brytning,depende sa language ug html lang na naka set.*/
+
+    }
+
+}  

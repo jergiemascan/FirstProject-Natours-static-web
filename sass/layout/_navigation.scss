@@ -1,0 +1,196 @@
+
+.navigation{
+
+    &__checkbox{
+        display: none;
+    }
+
+    &__button{ //circle white btn
+
+        background-color: $color-white;
+        height: 7rem; //mas dako sa bg kay ang btn mas wider.para they are on the top of each other
+        width: 7rem;
+        position: fixed;
+        top: 6rem;
+        right: 6rem;
+        border-radius: 50%;
+        z-index: 2000;
+        box-shadow: 0 1rem 3rem rgba($color-black, .1);
+        text-align: center;//3 LINES inside the button menu, X to open the external menu
+        cursor: pointer;
+          /*MEDIA QUERY*/
+     @include respond(tab-port){
+        top: 4rem;
+        right: 4rem;
+     }
+     @include respond(phone){
+        top: 3rem;
+        right: 3rem;
+     }
+    }
+
+    &__background{// circle navi with green color and bg of nav Menu
+        height: 6rem;
+        width: 6rem;
+        border-radius: 50%;
+        position: fixed;
+        top: 6.5rem;
+        right: 6.5rem;
+        background-image: radial-gradient($color-primary-light, $color-primary-dark);
+        z-index:1000;//high value to stays on the top even scrolling
+        //the bg easeInout in easings.net copy the cubic-bezier and pste it.
+        transition: transform .8s cubic-bezier(0.83, 0, 0.17, 1);
+        //TO HIDE IT
+        //transform: scale(95);//bg color sa navigation
+
+            /*MEDIA QUERY*/
+     @include respond(tab-port){
+        top: 4.5rem;
+        right: 4.5rem;
+      }
+      @include respond(phone){
+        top:3.5rem;
+        right:3.5rem;
+     }
+    }
+
+    &__nav{ //nav menu whole
+        height: 100vh;
+        width: 100%;
+        position:fixed;
+        top:0;
+        right: 0;
+        z-index: 1500;
+        
+        //to hide it
+        opacity: 0;
+        width: 0;
+        //nav cubic-bezier easeInOutBack ang nav menu effect
+        transition: all .8s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+
+    }
+
+    &__list{//nav meny list 1 by 1
+        position:absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        list-style: none;
+        text-align: center;
+
+    }
+
+    &__item{
+        margin: 1rem;
+    }
+
+    &__link{
+        &:link,
+        &:visited{
+
+        display: inline-block;//para maapply ang padding
+        font-size: 3rem;
+        font-weight: 300;
+        padding: 1rem 2rem;
+        color:$color-white;
+        text-decoration: none;
+        text-transform: uppercase;
+        //katunga sa color puti katunga transparent or other, ang 120deg mohiwi sya inig hover pa slanting.
+        background-image: linear-gradient(120deg, transparent 0%, transparent 50%, $color-white 50%);
+        background-size: 220%;
+        transition: all .4s;
+
+        span{
+            margin-right: 1rem;
+            display: inline-block;//para side by side same sa parent
+        }
+    }
+    &:hover,
+    &:active{
+
+        background-position: 100%;
+        color: $color-primary;
+        transform: translateX(1rem);//para inig hover morag mosibog pa right side ang elememt
+
+    }
+    }
+    //FUNCTIONALITY
+
+    //we hit the label and checkbox  becomes check and visible ~ sibling which is &__background,tpos ang specs sa background mao ang mogawas.ex green bg)
+    //to wake up the hidden settings and apply when clicked. For both
+    &__checkbox:checked ~ &__background {
+
+        transform:scale(95);
+
+    }
+    //back to how it was
+    &__checkbox:checked ~ &__nav {
+
+        opacity: 1;
+        width: 100%;
+
+    }
+    //ICON
+
+    &__icon{
+
+        position: relative;
+        margin-top:3.5rem;//3 lines sa sulod sa grey circle sa menu sa nav right side.para ma center sya.
+        &,
+        &::before,
+        &::after{
+            width: 3rem;
+            height: 2px;
+            background-color: $color-grey-dark-3;
+            display:inline-block;
+        }
+
+        &::before,
+        &::after{
+
+            content: "";
+            position: absolute;
+            left: 0;
+            transition: all .2s;
+
+        }
+
+        &::before{
+            top: -.8rem;//kadako sa space sa 3 lines
+        }
+        &::after{
+            top: .8rem;//kadako sa space sa 3 lines
+        }   
+    }
+
+    //when hovering the button 3lines moves up and down(moboka) a littlebit
+    &__button:hover &__icon::before{
+
+        top:-1rem;
+
+    }
+    &__button:hover &__icon::after{
+
+        top: 1rem;
+        
+    }
+    // for the 3 lines to make X,the middle line will dissappear. Icon ang sa tunga na line
+
+    &__checkbox:checked + &__button &__icon {
+
+        background-color: transparent;//itago ang middle line para ang rest mag X.
+    }
+
+    // for the 2 remaining lines to make X
+    &__checkbox:checked + &__button &__icon::before {
+
+        top:0;//para mutaas siya para naay space ang 2 lines para maging x
+        transform: rotate(135deg);//to make it cooler 180-45,para mag animate pa sya
+    }
+    
+    &__checkbox:checked + &__button &__icon::after{
+        top:0;
+        transform: rotate(-135deg);
+    }
+
+}

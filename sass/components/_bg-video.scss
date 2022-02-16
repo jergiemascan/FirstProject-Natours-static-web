@@ -1,0 +1,21 @@
+.bg-video{
+    
+    position: absolute;;
+    top:0;
+    left: 0;
+    height: 100%;
+    width:100%;
+    z-index: -1;
+    opacity: .25;
+    margin-right: 0;
+    
+
+   &__content{ //specify japon dre para ang videocontent pareho kahaba sa bg video.
+            
+        height: 100%;
+        width:100%;
+        object-fit: cover;//to occupy all bg with the video,the parents element.
+    
+    } 
+ 
+}

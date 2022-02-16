@@ -1,0 +1,76 @@
+.card{
+    perspective: 150rem;
+    -moz-perspective: 150rem;
+    position: relative;
+    height: 50rem; //when using position absolute relative, the height disappear. 
+    //So dont use Z-index but instead use same height on both parent and child.
+
+    &__side{
+        
+        height: 50rem;
+        transition: all .8s ease;
+        position: absolute;
+        top:0;
+        left: 0;
+        width: 100%;
+        backface-visibility: hidden;//para itago ang kabilang side pagpakli.
+        border-radius: 3px;
+        overflow: hidden;
+        box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+
+        &--front{
+            background-color:$color-white;//sa harap na side. wala pa gi hover
+            
+        }
+        &--back{
+            //background-color: green;// sa likod sa side pag i hover mobaliktad 180deg.
+            transform: rotateY(180deg);//rotation pakli in half circle.
+
+            &-1{
+                background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark);
+            }
+        }
+    }
+    
+    &:hover &__side--front { //pag hover sa front mobaliktad na sya.
+        transform: rotateY(-180deg);//direction sa pagpakli.
+    }
+
+    &:hover &__side--back{
+            transform: rotateY(0);//paghover sa back mobalik to 0, atubangan.
+        }
+    
+
+
+        //FRONT SIDE STYLES
+
+    &__picture{
+        height: 23rem;
+        background-size: cover;
+        background-blend-mode: screen;
+        &--1{
+            background-image:linear-gradient(to right bottom,$color-secondary-light, $color-secondary-dark ), url(../img/nat-5.jpg);
+        }
+        &--1{
+            background-image:linear-gradient(),url(../img/nat-5.jpg);
+        }
+        &--1{
+            background-image:linear-gradient(),url(../img/nat-5.jpg);
+        }
+        
+    }
+    &__heading{
+        font-size: 2.8rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        color: $color-white;
+    }
+    &__details{
+
+    }
+   
+
+
+
+
+}

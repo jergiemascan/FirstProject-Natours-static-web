@@ -1,0 +1,125 @@
+
+.form{
+
+    overflow: hidden;
+    &__group:not(:last-child) {
+        margin-bottom: 2rem;
+    }
+
+    &__input{
+        font-size: 1.5rem;
+        font-family: inherit;
+        color: inherit;
+        padding: 1.5rem 2rem;
+        border-radius: 2px;
+        background-color: rgba($color-white, .5);
+        border: none;
+        border-bottom: 3px solid transparent;/*para dili mohopppa pataas pag i hover*/
+        width: 90%;
+        display: block;
+        transition: all .3s;
+
+        @include respond(tab-port){
+            width: 100%;
+            
+        }
+
+
+        &:focus {/*kung walay mouse keyboard lang magamit japon*/
+            outline: none;
+            box-shadow: 0 1rem 2remvrgbda($color-black), .1;
+            border-bottom: 3px solid $color-primary;
+    
+        }
+        /*kung mali ang isulat na name or email mag orange sya until ma correct mo green sya*/
+        &:focus:invalid {
+            border-bottom: 3px solid $color-secondary-dark;
+        }
+
+        &::-webkit-input-placeholder{
+            color: $color-grey-dark-2;
+        }
+
+    }
+    
+    &__label{
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-left: 2rem;
+        margin-top: .7rem;
+        display: block;
+        transition: all .3s;
+
+    }
+    /* para inig click sa blank sa name ug email mawala ang label tpos inig sugod type balik napod*/
+
+    &__input:placeholder-shown + &__label{
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-4rem);/*para mosaka ang name tpos inig type mobaba*/
+    }
+
+    &__radio-group{ /*parents sa duha ka btn small and large*/
+        width: 49%;
+        display: inline;
+
+        @include respond(tab-port){
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+    }
+    
+    &__radio-input{ /*grey na btn itago para ang green ang makita*/
+
+        display: none;
+    }
+    &__radio-label{ /*buttons sa small and large tour*/
+
+        font-size: $default-font-size;
+        cursor: pointer;
+        position: relative;
+        padding-left: 4.5rem;
+        
+    }
+
+    &__radio-label:not(:last-child) {
+        margin-right: 5rem;
+    }
+
+    &__radio-button{
+
+        height: 3rem;
+        width: 3rem;
+        border: 5px solid $color-primary;
+        border-radius:  50%;
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        top: -.4rem;
+
+        &::after{ /*button/dot sa sulod sa dako na green button*/
+
+            content: " ";
+            display: block;
+            height: 1rem;
+            width: 1rem;
+            border-radius: 50%;
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%);
+            background-color: $color-primary;
+            opacity: 0;/*to hide the green btn inside the circle*/
+            transition: opacity .2s;
+        }
+    }
+
+    /*since radio btn is a span and not a child to radio input,to apply our own btn kay mas nindot this way must go*/
+
+    &__radio-input:checked ~ &__radio-label &__radio-button::after{
+
+        opacity: 1;
+    }
+    
+
+}
